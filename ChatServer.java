@@ -66,6 +66,8 @@ class ChatHandler implements URLHandler {
 
 class ChatServer {
   public static void main(String[] args) throws IOException {
-    Server.start(4000, new ChatHandler());
+    int port = Integer.parseInt(args[0]);
+    System.out.println(port);
+    Server.start(port, new ChatHandler());
   }
 }
