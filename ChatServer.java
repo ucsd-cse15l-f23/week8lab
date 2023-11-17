@@ -33,7 +33,7 @@ class ChatHandler implements URLHandler {
           String analysis = "";
           index += 1;
           int[] codePoints = new int[0]; //initialize the codePoints array
-          if (line.contains(shouldBeUser[1])) //{ bug1: will cause inclusion of all messages
+          if (line.contains(shouldBeUser[1])) //{ //bug1: will cause inclusion of all messages
             codePoints = line.codePoints().toArray();
             int characterIndex = 0;
             while (characterIndex < codePoints.length) {
