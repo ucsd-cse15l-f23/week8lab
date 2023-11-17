@@ -60,6 +60,24 @@ class ChatHandler implements URLHandler {
       }
       return matchingMessages;
     }
+    else if(url.getPath().equals("/retreive-history")) {
+      String[] params = url.getQuery().split("&");
+      String[] shouldBeFile = params[0].split("=");
+      if (shouldBeFile[0].equals("file")) {
+        String fileName = shouldBeFile[1];
+        // String fileName = shouldBeFileName[0];
+        ChatHistoryReader reader = new ChatHistoryReader();
+        try {
+          String[] contents = reader.readFileAsArray("chathistory/" + fileName);
+          for (String line : contents) {
+            this.chatHistory += line + "\n\n";
+          }
+        } catch (IOException e) {
+          System.err.println("Error reading file: " + e.getMessage());
+        }
+      }
+      return this.chatHistory;
+    }
     return "404 Not Found";
   }
 }
