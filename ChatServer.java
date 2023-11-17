@@ -21,36 +21,30 @@ class ChatHandler implements URLHandler {
         return "Invalid parameters: " + String.join("&", params);
       }
     }
-    else if(url.getPath().equals("/kawaii")) {
+    else if(url.getPath().equals("/semantic-analysis")) {
       String[] params = url.getQuery().split("&");
       String[] shouldBeUser = params[0].split("=");
       String matchingMessages = "";
       if (shouldBeUser[0].equals("user")) {
          for(String line : this.chatHistory.split("\n\n")) {
+          String analysis = "";
            if (line.contains(shouldBeUser[1])) {
             int numberOfExclamationMarks = 0;
-            int numberOfEmojis = 0;
             for(int character : line.codePoints().toArray()) {
               if(character == (int)'!') {
                 numberOfExclamationMarks += 1;
               }
-              String[] emojis = { "😂", "🥹"};
-              if(Arrays.asList(emojis).contains(new String(Character.toChars(character)))) {
-                numberOfEmojis += 1;
+              if(new String(Character.toChars(character)).equals("😂")) {
+                analysis += "This message has a LOL vibe. ";
+              }
+              if(new String(Character.toChars(character)).equals("🥹")) {
+                analysis += "This message has a awwww vibe. ";
               }
             }
-            String signature = "";
-            if (numberOfExclamationMarks >= 2){
-              signature += "(υ◉ω◉υ)";
+            if (numberOfExclamationMarks > 2){
+              analysis += "This message ends forcefully.";
             }
-            if (numberOfEmojis >= 1) {
-              signature += "(⁀ᗢ⁀)";
-            }
-            if (numberOfEmojis >= 2) {
-              signature += "٩(◕‿◕)۶";
-            }
-
-            matchingMessages += line + signature + "\n\n";
+            matchingMessages += line + analysis + "\n\n";
            }
          }
 
