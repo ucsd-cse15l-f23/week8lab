@@ -35,14 +35,14 @@ class ChatHandler implements URLHandler {
                 numberOfExclamationMarks += 1;
               }
               if(new String(Character.toChars(character)).equals("😂")) {
-                analysis += "This message has a LOL vibe. ";
+                analysis += " This message has a LOL vibe.";
               }
               if(new String(Character.toChars(character)).equals("🥹")) {
-                analysis += "This message has a awwww vibe. ";
+                analysis += " This message has a awwww vibe.";
               }
             }
             if (numberOfExclamationMarks > 2){
-              analysis += "This message ends forcefully.";
+              analysis += " This message ends forcefully.";
             }
             matchingMessages += line + analysis + "\n\n";
            }
